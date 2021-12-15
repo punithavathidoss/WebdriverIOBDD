@@ -3,7 +3,8 @@ class WorkspaceTest {
     get workspaceButton() { return $("//a[text()='Explore Workspace']") }
     get workspaceValidation() { return $("//h1") }
     get workspaceNavBar() { return $("#testing") }
-    
+    get homeButton() { return $("[fill='currentColor']") }
+
     get inputElement() { return $("//a[text()='Edit']") }
     get inputHeader() { return $("//h1") }
     get inputName() { return $("#fullName") }
@@ -16,6 +17,7 @@ class WorkspaceTest {
     get dropdownHeader() { return $("//h1") }
     get dropdownSelect() { return $("#fruits") }
     get selectByIndexNo() { return $("#superheros") }
+    get dropdownValidation() { return $("//p[text()='You have selected Apple']") }
 
     get alertElement() { return $("//a[text()='Dialog']") }
     get alertHeader() { return $("//h1") }
@@ -26,6 +28,7 @@ class WorkspaceTest {
     get windowElement() { return $("//a[text()='Tabs']") }
     get windowHeader() { return $("//h1") }
     get gotoHomeButton() { return $("#home") }
+    get windowHeaderValidation() { return $("//h1") }
 
     get elementsElement() { return $("//a[text()='Find Elements']") }
     get elementValidate() { return $("//h1") }
@@ -35,6 +38,7 @@ class WorkspaceTest {
     get dragdropElement() { return $("//a[text()='AUI - 2']") }
     get dragdropValidate() { return $("//h1") }
     get selectDrag() { return $("//div[@id='draggable']") }
+    get target() { return $(".ui-widget-header.ui-droppable.ui-state-highlight") }
     get dragdroppedValidate() { return ("//p[text()='Dropped!']") }
 
     get multiSelectElement() { return $("//a[text()='AUI - 4']") }
@@ -43,19 +47,39 @@ class WorkspaceTest {
     get selectTestNg() { return $("//h3[text()='TestNg']") }
     get selectPostman() { return $("//h3[text()='Postman']") }
 
-    // get slideElement() { return $("//a[text()='AUI - 5']") }
-    // get SlideHeader(){return $("")}
-
-    // get calenderElement() { return $("//a[text()='Date & Time']") }
-    // get calenderValidate() { return $("//h1") }
-    // get () { return $("") }
-    // get selectdateValidate() { return $("") }
 
     get waitElement() { return $("//a[text()='Timeout']") }
     get waitHeader() { return $("//h1") }
     get simpleAlertWait() { return $("#accept") }
-    //get waitAlertValidate() { return $("") }
 
+    async dropdownFruit() {
+        await this.dropdownSelect.click()
+        await this.dropdownSelect.selectByVisibleText("Apple")
+    }
+    async dropdownSuperHeor() {
+        await this.selectByIndexNo.selectByIndex(2)
+    }
+    async alertTypes() {
+        await this.simpleAlert.click()
+        await browser.acceptAlert()
 
+        await this.confirmAlert.click()
+        await browser.acceptAlert()
+
+        await this.promptAlert.click()
+        await browser.sendAlertText("Punroos")
+        await browser.acceptAlert()
+    }
+    async windowHandle() {
+        await this.gotoHomeButton.click()
+    }
+    async gitNameValue(gitName: { name: string }) {
+        await this.gitName.setValue(gitName.name)
+    }
+    async multipleSelect() {
+        await this.selectSelenium.click()
+        await this.selectTestNg.click()
+        await this.selectPostman.click()
+    }
 }
 export default new WorkspaceTest()
