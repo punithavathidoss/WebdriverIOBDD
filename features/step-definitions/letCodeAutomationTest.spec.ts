@@ -6,12 +6,15 @@ import WorkspaceTest from "../pageobjects/letCodeWorkspaceTest"
 import CoursePage from "../pageobjects/letCodeCoursesTest"
 import ProductPageTest from "../pageobjects/letCodeProductTest"
 
+
 Given(/^I am in the letCode home page$/, async () => {
     SignUpTesting.page();
     browser.maximizeWindow()
 });
-Then(/^I click on signup and I validate the header \"([^\"]*)\"$/, async (signup) => {
+When(/^I click on signup$/, async () => {
     await SignUpTesting.signUp.click()
+});
+Then(/^I validate the header \"([^\"]*)\"$/, async (signup) => {
     await expect(SignUpTesting.signUpheader).toHaveText(signup)
 });
 When(/^I enter the credentials and click sign up for account creation$/, async () => {
@@ -24,6 +27,8 @@ When(/^I enter the credentials and click sign up for account creation$/, async (
 Then(/^I should see account created page with header text as \"([^\"]*)\"$/, async (letcodewithkoushik) => {
     await expect(SignUpTesting.accoutCreateValidate).toHaveText(letcodewithkoushik)
 });
+
+
 When(/^I click on Explore Workspace Button$/, async () => {
     await WorkspaceTest.workspaceButton.click()
 });
@@ -33,30 +38,36 @@ Then(/^I should be navigated to Workspace page and I validate the header text \"
 
 
 
-Then(/^I click on Input and I navigate to input page with header \"([^\"]*)\"$/, async (input) => {
+When(/^I click on Input$/, async () => {
     await WorkspaceTest.inputElement.click()
+});
+Then(/^I navigate to input page with header \"([^\"]*)\"$/, async (input) => {
     await expect(WorkspaceTest.inputHeader).toHaveText(input)
 });
-When(/^I start to fill the inputs$/, async () => {
+When(/^I start to fill the Inputs$/, async () => {
     await WorkspaceTest.inputName.setValue(signUp.names.name)
     await WorkspaceTest.workspaceNavBar.click()
 });
 
 
 
-Then(/^I click on Button and I validate Button page with header \"([^\"]*)\"$/, async (button) => {
+When(/^I click on Button$/, async () => {
     await WorkspaceTest.buttonElement.click()
+});
+Then(/^I validate Button page with header \"([^\"]*)\"$/, async (button) => {
     await expect(WorkspaceTest.buttonValidate).toHaveText(button)
 });
-Then(/^I click on Hold Button$/, async () => {
+When(/^I click on Hold Button$/, async () => {
     await WorkspaceTest.holdButton.waitForClickable()
     await WorkspaceTest.workspaceNavBar.click()
 });
 
 
 
-Then(/^I click on Select option and I validate the header \"([^\"]*)\"$/, async (dropdown) => {
+When(/^I click on Select option$/, async () => {
     await WorkspaceTest.selectElement.click()
+});
+Then(/^I validate the header \"([^\"]*)\"$/, async (dropdown) => {
     await expect(WorkspaceTest.dropdownHeader).toHaveText(dropdown)
 });
 When(/^I select different options in different dropdowns$/, async () => {
@@ -70,8 +81,10 @@ Then(/^I validate wheather its selected as text \"([^\"]*)\"$/, async (youhavese
 
 
 
-Then(/^I click on Alert element and I validate the header text \"([^\"]*)\"$/, async (alert) => {
+When(/^I click on Alert element$/, async () => {
     await WorkspaceTest.alertElement.click()
+});
+Then(/^I validate the header text \"([^\"]*)\"$/, async (alert) => {
     await expect(WorkspaceTest.alertHeader).toHaveText(alert)
 });
 When(/^I select different alert and handle them$/, async () => {
@@ -81,24 +94,31 @@ When(/^I select different alert and handle them$/, async () => {
 
 
 
-// Then(/^I click on Windows element and validate the header with \"([^\"]*)\"$/, async (windows) => {
-//     await WorkspaceTest.windowElement.click()
-//     await expect(WorkspaceTest.windowHeader).toHaveText(windows)
-// });
-// When(/^I select Open Home page and it navigates to new windows$/, async () => {
-//     await WorkspaceTest.gotoHomeButton.click()
-//     await browser.switchToWindow('https://letcode.in/test')
-// });
-// Then(/^I validate the navigated window with \"([^\"]*)\"$/, async (header) => {
-//     await expect(WorkspaceTest.windowHeaderValidation).toHaveText(header)
-//     await browser.closeWindow()
-//     await WorkspaceTest.workspaceNavBar.click()
-// });
+When(/^I click on Windows element$/, async () => {
+    await WorkspaceTest.windowElement.click()
+});
+Then(/^I validate the header with \"([^\"]*)\"$/, async (windows) => {
+    await expect(WorkspaceTest.windowHeader).toHaveText(windows)
+});
+When(/^I select Open Home page and it navigates to new windows$/, async () => {
+    await WorkspaceTest.gotoHomeButton.click()
+    const navigateWindow = await browser.getWindowHandles()
+    await browser.switchToWindow(navigateWindow[1])
+});
+Then(/^I validate the navigated window with \"([^\"]*)\"$/, async (header) => {
+    await expect(WorkspaceTest.windowHeaderValidation).toHaveText(header)
+    const navigateWindow = await browser.getWindowHandles()
+    await browser.closeWindow()
+    await browser.switchToWindow(navigateWindow[0])
+    await WorkspaceTest.workspaceNavBar.click()
+});
 
 
 
-Then(/^I click on Elements element and validate the header with \"([^\"]*)\"$/, async (elements) => {
+When(/^I click on Elements element$/, async () => {
     await WorkspaceTest.elementsElement.click()
+});
+Then(/^validate the header with \"([^\"]*)\"$/, async (elements) => {
     await expect(WorkspaceTest.elementValidate).toHaveText(elements)
 });
 When(/^I enter the value and click search$/, async () => {
@@ -122,8 +142,10 @@ When(/^I enter the value and click search$/, async () => {
 
 
 
-Then(/^I click on MultiSelect element and validate the header with \"([^\"]*)\"$/, async (selectable) => {
+When(/^I click on MultiSelect element$/, async () => {
     await WorkspaceTest.multiSelectElement.click()
+});
+Then(/^validate the header with \"([^\"]*)\"$/, async (selectable) => {
     await expect(WorkspaceTest.multiSelectHeader).toHaveText(selectable)
 });
 When(/^I click on Multiple Option$/, async () => {
@@ -133,18 +155,15 @@ When(/^I click on Multiple Option$/, async () => {
 
 
 
-Then(/^I click on Wait and validate the header text with \"([^\"]*)\"$/, async (wait) => {
+When(/^I click on Wait$/, async () => {
     await WorkspaceTest.waitElement.click()
+});
+Then(/^validate the header text with \"([^\"]*)\"$/, async (wait) => {
     await expect(WorkspaceTest.waitHeader).toHaveText(wait)
 });
-When(/^I click simple alert and wait for alert$/, async () => {
+When(/^I click simple alert and wait for alert and accept alert$/, async () => {
     await WorkspaceTest.simpleAlertWait.click()
-    await WorkspaceTest.simpleAlertWait.waitForDisplayed()
-    if(await browser.isAlertOpen()){}
-    await browser.acceptAlert()
-});
-Then(/^I validate the alert box and click Ok buttton$/, async () => {
-    await browser.getAlertText()
+    await browser.pause(5000)
     await browser.acceptAlert()
     await WorkspaceTest.homeButton.click()
 });
@@ -178,8 +197,13 @@ Then(/^I validate the XPath page with header text \"([^\"]*)\"$/, async (letxpat
 });
 When(/^I click on Try it today element it navigates to new extension window$/, async () => {
     await ProductPageTest.tryTodayButton.click()
+    const extensionTab = browser.getWindowHandles()
+    await browser.switchToWindow(extensionTab[1])
 });
 Then(/^I validate the Page header \"([^\"]*)\" and navigate back to LetCode Home page$/, async (letxpath) => {
     await expect(ProductPageTest.xPathExtensionHeader).toHaveText(letxpath)
+    const productTab = browser.getWindowHandles()
+    await browser.closeWindow()
+    await browser.switchToWindow(productTab[0])
     await ProductPageTest.homeButton.click()
 });
