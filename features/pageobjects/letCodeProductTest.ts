@@ -7,5 +7,12 @@ get tryTodayButton(){ return $("//a[contains(@href,'https://chrome.google.com/we
 get xPathExtensionHeader(){ return $("//h1[text()='LetXPath']") }
 get homeButton() { return $("[fill='currentColor']") }
 
+async product(){
+    await this.productElemBtn.click()
+}
+async tryItTodayButton(){
+    await this.tryTodayButton.click()
+}
+
 }
 export default new ProductPageTest()
