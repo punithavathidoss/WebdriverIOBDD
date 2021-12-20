@@ -11,12 +11,11 @@ Feature: The LetCode Automation Test WebPage
         Then I should see account created page with header text as "LetCode with Koushik"
 
     Scenario: Explore courses Validation
-        When I click on Explore courses it navigates to course page
+        When I click Explore courses it navigates to course page
         Then I validate the header text with "Courses"
         Then I check for available courses heading "Selenium Webdriver"
         When I click on a course and it navigates to the selected page
         Then I validate header with text "Selenium Webdriver" and go to homepage
-
 
     Scenario: Workspace Validation
         When I click on Explore Workspace Button
@@ -31,13 +30,6 @@ Feature: The LetCode Automation Test WebPage
         Then I validate the header "Dropdown"
         When I select different options in different dropdowns
         Then I validate wheather its selected as text "You have selected Apple"
-        When I click on Alert element
-        Then I validate the header text "Alert"
-        When I select different alert and handle them
-        When I click on Windows element
-        Then I validate the header with "Windows"
-        When I select Open Home page and it navigates to new windows
-        Then I validate the navigated window with "Practice and become pro in test automation"
         When I click on Elements element
         Then I should see the header with "Elements"
         When I enter the value and click search

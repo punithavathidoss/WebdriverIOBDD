@@ -1,4 +1,4 @@
-# WEBDRIVERIOCUCUMBERTS
+# WEBDRIVER_IO_CUCUMBER_TS
 <p>Cucumber Framework using WebdriverIO with Typescript</p>
 
 <p> This code helps in understanding the basic code writing and before running code, please try to go through the code.</p>
