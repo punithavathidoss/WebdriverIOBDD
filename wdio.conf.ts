@@ -1,3 +1,5 @@
+import folderutils from "./features/utils/folderutils";
+
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -58,11 +60,11 @@ export const config: WebdriverIO.Config = {
         browserName: 'chrome',
         acceptInsecureCerts: true
     }
-    // {
-    //     maxInstances: 1,
-    //     browserName: 'MicrosoftEdge',
-    //     acceptInsecureCerts: true
-    // }
+        // {
+        //     maxInstances: 1,
+        //     browserName: 'MicrosoftEdge',
+        //     acceptInsecureCerts: true
+        // }
     ],
     //
     // ===================
@@ -188,8 +190,9 @@ export const config: WebdriverIO.Config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function (config, capabilities) {
+        folderutils.deleteFolder('allure-results')
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -264,11 +267,12 @@ export const config: WebdriverIO.Config = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {Object}             context          Cucumber World object
      */
-    afterStep: async function (step, scenario, result, context) {
+
+    afterStep: async function (step, scenario, result) {
         if (!result.passed) {
             await browser.takeScreenshot();
         }
-    }
+    },
     /**
      *
      * Runs after a Cucumber Scenario.
